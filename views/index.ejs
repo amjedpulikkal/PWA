@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <body>
+    <div class="flex justflay-center" id="min-dev">
+
+      <div class="w-40 h-10 bg-red-200">
+
+      </div>
+     
+    </div>
+  </body>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("/service-worker.js")
+          .then((registration) => {
+            console.log(
+              "Service Worker registered with scope:",
+              registration.scope
+            );
+          })
+          .catch((error) => {
+            console.log("Service Worker registration failed:", error);
+          });
+      });
+    }
+
+    fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((json) => console.log(json));
+  </script>
+</html>
